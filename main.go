@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/haroldcampbell/go_utils/utils"
 	"github.com/rakyll/portmidi"
@@ -15,7 +16,33 @@ func main() {
 		return
 	}
 
-	getDeviceInfo()
+	_, outputDeviceID := getDeviceInfo()
+
+	out, err := portmidi.NewOutputStream(outputDeviceID, 1024, 0)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	seq := NewSequencer(out)
+	go func() {
+
+		stopAll(seq)
+		// seq.Add([]NoteD{{"C", 1}, {"E", 1}, {"G", 1}})
+		seq.Add([]NoteD{{"C", 1}})
+		// seq.Add([]NoteD{{"E", 1}})
+		// seq.Add([]NoteD{{"G", 1}})
+
+		seq.ReatPlay()
+	}()
+
+	var option int
+
+	fmt.Println("Press enter to end.")
+	fmt.Scanf("%c", &option)
+	fmt.Printf("Stopping all notes.\nDone.\n")
+
+	stopAll(seq)
+	out.Close()
 }
 
 func getDeviceInfo() (portmidi.DeviceID, portmidi.DeviceID) {
