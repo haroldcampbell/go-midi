@@ -2,63 +2,21 @@ package main
 
 import (
 	"fmt"
-	"log"
-
-	"github.com/haroldcampbell/go_utils/utils"
-	"github.com/rakyll/portmidi"
+	c "go-midi/core"
 )
 
 func main() {
+	const framerate = 800
 
-	err := portmidi.Initialize()
-	if err != nil {
-		fmt.Printf("Error initializing portmidi: %v\n", err)
+	seq := c.NewSequencer(framerate, framerate/2.0)
+	if seq == nil {
+		fmt.Printf("Failed to start sequencer\n")
 		return
 	}
 
-	_, outputDeviceID := getDeviceInfo()
+	c.StopAll(seq)
+	seq.Add([]c.S{{"C", 1, c.N4}})
 
-	out, err := portmidi.NewOutputStream(outputDeviceID, 1024, 0)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	seq := NewSequencer(out)
-	go func() {
-
-		stopAll(seq)
-		// seq.Add([]NoteD{{"C", 1}, {"E", 1}, {"G", 1}})
-		seq.Add([]NoteD{{"C", 1}})
-		// seq.Add([]NoteD{{"E", 1}})
-		// seq.Add([]NoteD{{"G", 1}})
-
-		seq.ReatPlay()
-	}()
-
-	var option int
-
-	fmt.Println("Press enter to end.")
-	fmt.Scanf("%c", &option)
-	fmt.Printf("Stopping all notes.\nDone.\n")
-
-	stopAll(seq)
-	out.Close()
-}
-
-func getDeviceInfo() (portmidi.DeviceID, portmidi.DeviceID) {
-	var numDevices = portmidi.CountDevices() // returns the number of MIDI devices
-	fmt.Printf("Found %v devices\n", numDevices)
-
-	var inputDeviceID = portmidi.DefaultInputDeviceID()   // returns the ID of the system default input
-	var outputDeviceID = portmidi.DefaultOutputDeviceID() // returns the ID of the system default output
-
-	var deviceInfo *portmidi.DeviceInfo
-
-	deviceInfo = portmidi.Info(inputDeviceID) // returns info about a MIDI device
-	fmt.Printf("Input Device: %v\n", utils.PrettyMongoString(deviceInfo))
-
-	deviceInfo = portmidi.Info(outputDeviceID) // returns info about a MIDI device
-	fmt.Printf("Output Device: %v\n", utils.PrettyMongoString(deviceInfo))
-
-	return inputDeviceID, outputDeviceID
+	seq.Play()
+	seq.WaitToEnd()
 }
