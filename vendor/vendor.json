@@ -1,0 +1,95 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"path": "C",
+			"revision": ""
+		},
+		{
+			"path": "bytes",
+			"revision": ""
+		},
+		{
+			"path": "crypto/rand",
+			"revision": ""
+		},
+		{
+			"path": "encoding/base64",
+			"revision": ""
+		},
+		{
+			"path": "encoding/hex",
+			"revision": ""
+		},
+		{
+			"path": "encoding/json",
+			"revision": ""
+		},
+		{
+			"path": "errors",
+			"revision": ""
+		},
+		{
+			"path": "fmt",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "8RKVl5qj30Q6HsDW6K0chZBVeaM=",
+			"path": "github.com/haroldcampbell/go_utils/utils",
+			"revision": "a32c65e31d691253debf1f567115f025b0de5e85",
+			"revisionTime": "2021-06-16T03:04:53Z"
+		},
+		{
+			"checksumSHA1": "c8TXyrN1ns/9eXOuazWP39hgqEs=",
+			"path": "github.com/rakyll/portmidi",
+			"revision": "d436ceaa537ad8d54b7e2065f984561fbb877ac8",
+			"revisionTime": "2020-10-20T18:07:02Z"
+		},
+		{
+			"path": "go-midi",
+			"revision": ""
+		},
+		{
+			"path": "log",
+			"revision": ""
+		},
+		{
+			"path": "math/rand",
+			"revision": ""
+		},
+		{
+			"path": "net/http",
+			"revision": ""
+		},
+		{
+			"path": "regexp",
+			"revision": ""
+		},
+		{
+			"path": "strconv",
+			"revision": ""
+		},
+		{
+			"path": "strings",
+			"revision": ""
+		},
+		{
+			"path": "sync",
+			"revision": ""
+		},
+		{
+			"path": "testing",
+			"revision": ""
+		},
+		{
+			"path": "time",
+			"revision": ""
+		},
+		{
+			"path": "unsafe",
+			"revision": ""
+		}
+	],
+	"rootPath": "go-midi"
+}
