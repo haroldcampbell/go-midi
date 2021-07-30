@@ -16,6 +16,7 @@ func main() {
 
 	c.StopAll(seq)
 	seq.Add([]c.S{{"C", 1, c.N4}})
+	seq.Add([]c.S{{"_", 1, c.N4}})
 
 	seq.RepeatPlay()
 	seq.WaitToEnd()
