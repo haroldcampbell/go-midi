@@ -148,29 +148,7 @@ func (s *Sequencer) Play() {
 	}()
 }
 
-func (s *Sequencer) ReatPlay() {
-	// go func() {
-	// 	var playHead time.Duration = 0
-	// 	for _ = range time.Tick(s.framerate) {
-	// 		noteEvents, ok := s.triggerEvents[playHead]
-
-	// 		if !ok {
-	// 			playHead = 0
-	// 			noteEvents, ok = s.triggerEvents[playHead]
-	// 			if !ok {
-	// 				return
-	// 			}
-	// 		}
-
-	// 		go func() {
-	// 			for _, event := range noteEvents.events {
-	// 				event.trigger(playHead, s)
-	// 			}
-	// 		}()
-
-	// 		playHead += s.framerate
-	// 	}
-	// }()
+func (s *Sequencer) RepeatPlay() {
 	go func() {
 		for {
 			s.Play()
